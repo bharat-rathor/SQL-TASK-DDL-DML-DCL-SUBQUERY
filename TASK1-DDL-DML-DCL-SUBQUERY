@@ -1,0 +1,132 @@
+PART A: DDL (Data Definition Language)
+1. Create Database
+
+Create a database named shop_db.
+
+2. Create Table: products
+
+Create a table with the following structure:
+
+Field Name	Data Type	Description
+product_id	INT	Primary Key, Auto Increment
+product_name	VARCHAR(100)	Name of the product
+category	VARCHAR(50)	Product category
+brand	VARCHAR(50)	Brand name
+price	DECIMAL(10,2)	Product price
+quantity	INT	Available stock
+status	VARCHAR(20)	Available / Out of Stock
+created_at	DATE	Date added
+
+📌 Constraints:
+
+product_id → Primary Key
+
+price must be greater than 0
+
+quantity must not be negative
+
+3. Alter Table
+
+Add a column discount (DECIMAL(5,2))
+
+Rename column status to availability
+
+Drop the column discount
+
+4. Drop Table
+
+Write a query to drop the products table.
+
+PART B: DML (Data Manipulation Language)
+5. Insert Records
+
+Insert at least 10 records into the products table using different:
+
+categories (Electronics, Clothing, Grocery, etc.)
+
+brands
+
+prices
+
+quantities
+
+6. Update Records
+
+Update the price of a product by product_id
+
+Increase quantity by 10 for all products in Electronics category
+
+Change availability to Out of Stock where quantity = 0
+
+7. Delete Records
+
+Delete a product by product_id
+
+Delete all products where availability = Out of Stock
+
+PART C: SELECT Queries
+Basic SELECT
+
+Display all products
+
+Display product name, price, and category only
+
+WHERE Clause
+
+Display products with price greater than 500
+
+Display products belonging to category Electronics
+
+Display products with quantity between 10 and 50
+
+ORDER BY Clause
+
+Display all products ordered by price ascending
+
+Display all products ordered by quantity descending
+
+LIKE Clause
+
+Display products whose name starts with 'S'
+
+Display products whose brand contains 'tech'
+
+Display products whose name ends with 'Pro'
+
+LIMIT and OFFSET
+
+Display the first 5 products
+
+Display 5 products starting from the 6th record
+
+Display the top 3 most expensive products
+
+GROUP BY Clause
+
+Display total number of products in each category
+
+Display average price of products by brand
+
+Display total stock (sum of quantity) per category
+
+HAVING Clause
+
+Display categories having more than 3 products
+
+Display brands where average price is greater than 1000
+
+PART D: Combined Queries
+
+Display category-wise total products where total products > 2, ordered by total products descending
+
+Display brands with total stock less than 50
+
+Display the most expensive product in each category
+
+PART E: Bonus (Optional – For Advanced Students)
+
+Display products added in the last 30 days
+
+Display second highest priced product
+
+Display products whose price is above the average price

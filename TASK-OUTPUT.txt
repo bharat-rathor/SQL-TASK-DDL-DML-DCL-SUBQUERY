@@ -1,0 +1,245 @@
+PART A: DDL (Data Definition Language)
+1. Create Database
+
+Create a database named shop_db.
+
+=> create database shop_db;
+	
+2. Create Table: products
+
+Create a table with the following structure:
+
+Field Name	Data Type	Description
+product_id	INT	Primary Key, Auto Increment
+product_name	VARCHAR(100)	Name of the product
+category	VARCHAR(50)	Product category
+brand	VARCHAR(50)	Brand name
+price	DECIMAL(10,2)	Product price
+quantity	INT	Available stock
+status	VARCHAR(20)	Available / Out of Stock
+created_at	DATE	Date added
+
+📌 Constraints:
+
+product_id → Primary Key
+
+price must be greater than 0
+
+quantity must not be negative
+
+=> 
+use shop_db;
+
+create table products(
+    product_id int PRIMARY key AUTO_INCREMENT,
+    product_name varchar(20) ,
+    category varchar(30),
+    brand_name varchar(30),
+    price decimal(10,2) CHECK (price>0),
+    quantity int check (qunatity>0),
+    status varchar(20),
+    create_at date 
+ );
+
+
+3. Alter Table
+
+Add a column discount (DECIMAL(5,2))
+
+=> alter table products add column discount decimal(5,2) ;
+
+Rename column status to availability
+
+=> alter table products change STATUS availability varchar(20);
+
+Drop the column discount
+
+=> alter table products drop column discount;
+
+4. Drop Table
+
+Write a query to drop the products table.
+
+=> drop table products;
+
+PART B: DML (Data Manipulation Language)
+5. Insert Records
+
+Insert at least 10 records into the products table using different:
+
+categories (Electronics, Clothing, Grocery, etc.)
+
+brands
+
+prices
+
+quantities
+
+=> 
+INSERT INTO products 
+(product_name, category, brand_name, price, quantity, availability, create_at)
+VALUES
+('Smartphone X1', 'Electronics', 'Samsung', 17999.50, 15, 'Available', '2024-01-12'),
+('Bluetooth Speaker', 'Electronics', 'JBL', 2999.00, 0, 'Out of Stock', '2024-02-05'),
+('Laptop Pro', 'Electronics', 'HP', 62999.99, 8, 'Available', '2024-03-18'),
+('Wireless Mouse', 'Electronics', 'Logitech', 899.75, 40, 'Available', '2024-04-02'),
+
+('Men Shirt', 'Clothing', 'Allen Solly', 1599.00, 25, 'Available', '2024-05-10'),
+('Women Kurti', 'Clothing', 'Biba', 2199.50, 12, 'Available', '2024-06-21'),
+('Denim Jacket', 'Clothing', 'Levis', 3499.00, 0, 'Out of Stock', '2024-07-08'),
+('Sports Trousers', 'Clothing', 'Adidas', 1999.99, 18, 'Available', '2024-08-14'),
+
+('Basmati Rice 10kg', 'Grocery', 'Daawat', 1249.00, 60, 'Available', '2024-09-03'),
+('Sugar 1kg', 'Grocery', 'Local', 48.50, 0, 'Out of Stock', '2024-10-11'),
+('Tea Powder', 'Grocery', 'Tata Tea', 275.25, 90, 'Available', '2024-11-19'),
+('Cooking Oil 5L', 'Grocery', 'Saffola', 899.00, 35, 'Available', '2024-12-01'),
+
+('Microwave Oven', 'Home Appliances', 'IFB', 12499.00, 7, 'Available', '2025-01-09'),
+('Air Conditioner', 'Home Appliances', 'Voltas', 32999.00, 4, 'Available', '2025-02-16'),
+('Electric Kettle', 'Home Appliances', 'Prestige', 1499.00, 0, 'Out of Stock', '2025-03-04'),
+('Ceiling Fan', 'Home Appliances', 'Havells', 2799.50, 22, 'Available', '2025-04-20'),
+
+('Running Shoes', 'Footwear', 'Puma', 4599.00, 14, 'Available', '2025-05-06'),
+('Formal Shoes', 'Footwear', 'Bata', 2199.75, 0, 'Out of Stock', '2025-06-13'),
+('Sandals', 'Footwear', 'Relaxo', 799.00, 45, 'Available', '2025-07-25'),
+('Slippers', 'Footwear', 'Sparx', 599.50, 70, 'Available', '2025-08-09');
+
+6. Update Records
+
+Update the price of a product by product_id
+
+=> update products set price = 4000 where product_id =3;
+
+Increase quantity by 10 for all products in Electronics category
+
+=> update products set quantity = quantity+10 where category="electronic";
+
+Change availability to Out of Stock where quantity = 0
+
+=> update products set availability = "out of stock" where quantity = 0;
+
+7. Delete Records
+
+Delete a product by product_id
+
+=> delete from products where product_id=1;
+
+Delete all products where availability = Out of Stock
+
+=> delete from products where availability = "out of stock";
+
+PART C: SELECT Queries
+Basic SELECT
+
+Display all products
+
+=> SELECT * FROM `products`;
+
+Display product name, price, and category only
+
+=> SELECT product_name,price,category FROM `products`;
+
+WHERE Clause
+
+Display products with price greater than 500
+
+=> select * from products where price >500;
+
+Display products belonging to category Electronics
+
+=> SELECT * FROM `products` WHERE category = "electronic";
+
+Display products with quantity between 10 and 50
+
+=> SELECT * FROM `products` WHERE quantity BETWEEN  10 and 50;
+
+ORDER BY Clause
+
+Display all products ordered by price ascending
+
+=> SELECT * FROM `products` order by price asc;
+
+Display all products ordered by quantity descending
+
+=> SELECT * FROM `products` order by quantity desc;
+
+LIKE Clause
+
+Display products whose name starts with 'S'
+
+=> SELECT * FROM `products` WHERE product_name like "s%";
+
+Display products whose brand contains 'tech'
+
+=> SELECT * FROM `products` WHERE product_name like "%tech%";
+
+Display products whose name ends with 'Pro'
+
+=> SELECT * FROM `products` WHERE product_name like "%pro";
+
+
+LIMIT and OFFSET
+
+Display the first 5 products
+
+=> SELECT * FROM `products` limit 5;
+
+Display 5 products starting from the 6th record
+
+=> SELECT * FROM `products` limit 5 OFFSET 5;
+
+Display the top 3 most expensive products
+
+==> select * from products order by price desc limit 3;
+
+GROUP BY Clause
+
+Display total number of products in each category
+
+=> select category , sum(quantity) from products group by category;
+
+Display average price of products by brand
+
+=> select brand_name , avg(price) from products group by brand_name;
+
+Display total stock (sum of quantity) per category
+
+=> select category , sum(quantity) from products group by category;
+
+HAVING Clause
+
+Display categories having more than 3 products
+
+=> select category , sum(quantity) from products group by category having sum(quantity)>3;
+
+Display brands where average price is greater than 1000
+
+=> select brand_name , avg(price) from products group by brand_name having avg(price) > 1000; 
+
+PART D: Combined Queries
+
+Display category-wise total products where total products > 2, ordered by total products descending
+
+=> SELECT category , count(*) from products group by category having count(*) > 2;
+
+Display brands with total stock less than 50
+
+=> select brand_name , sum(quantity) from products group by brand_name having sum(quantity) < 50;
+
+Display the most expensive product in each category
+
+=> select category , max(price) from products group by category;
+
+PART E: Bonus (Optional – For Advanced Students)
+
+Display products added in the last 30 days
+
+=> select * from products where create_at BETWEEN "2024-01-01" and "2024-01=31";
+
+Display second highest priced product
+
+=> select max(price) from products where price < (select max(price) from products);
+
+Display products whose price is above the average price
+
+=> select * from products where price > (select avg(price) from products);
